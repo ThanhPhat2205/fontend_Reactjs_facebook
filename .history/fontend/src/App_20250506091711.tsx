@@ -1,21 +1,18 @@
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/Auth/LoginForm';
-import RegisterPage from './components/Auth/RegisterForm';
+import RegisterPage from './components/Auth';
 import HomePage from './pages/HomePage';
-import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <>
-      <Navbar />
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 
 export default App;
-
