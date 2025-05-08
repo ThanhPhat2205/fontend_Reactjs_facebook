@@ -3,7 +3,7 @@ import LoginPage from './components/Auth/LoginForm';
 import RegisterPage from './components/Auth/RegisterForm';
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
-import ProfilePage from './components/ProfilePage';
+import ProfilePage from './components/';
 
 function App() {
   return (

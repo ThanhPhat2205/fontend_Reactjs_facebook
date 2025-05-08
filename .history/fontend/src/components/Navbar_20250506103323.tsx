@@ -1,15 +1,21 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useAuth } from './AuthContext';
 
 export default function Navbar() {
-  const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem('currentUser');
+    setIsLoggedIn(!!user);
+  }, []);
 
   const handleLogout = async () => {
     try {
       await axios.post('http://localhost:8001/api/auth/logout', {}, { withCredentials: true });
-      logout();
+      localStorage.removeItem('currentUser');
+      setIsLoggedIn(false);
       navigate('/login');
     } catch (err) {
       alert('Đăng xuất thất bại!');
@@ -29,10 +35,16 @@ export default function Navbar() {
               <Link to="/register" className="text-gray-700 hover:text-blue-600 transition">Đăng ký</Link>
             </>
           ) : (
-            <button onClick={handleLogout} className="text-gray-700 hover:text-blue-600 transition">Đăng xuất</button>
+            <button 
+              onClick={handleLogout} 
+              className="text-gray-700 hover:text-blue-600 transition"
+            >
+              Đăng xuất
+            </button>
           )}
         </div>
       </div>
     </nav>
   );
 }
+
